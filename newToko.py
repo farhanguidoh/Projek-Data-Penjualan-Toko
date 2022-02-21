@@ -1,4 +1,3 @@
-
 produk=[
     {
         'kategori':'pensil',
@@ -21,9 +20,7 @@ produk=[
 ]
 def upd_produk():
     for i in range(len(produk)):
-        a=produk[i]['kategori']
-        b=produk[i]['merk']
-        produk[i]['nama']=a+'_'+b
+        produk[i]['nama']=produk[i]['kategori']+'_'+produk[i]['merk']
         produk[i]['income']=produk[i]['unit sold']*produk[i]['unit price'] 
 upd_produk()
 
@@ -187,13 +184,9 @@ Silahkan pilih submenu(1-2): ''')
                 elif(update!=produk[i]['nama']):
                     ket=('produk tidak ada')
             print(ket)
-
         elif(subMenu=='2'):
             break
-
-
-
-
+        
 while True:
     pilihanMenu=input('''
 =====Penjualan Toko Guido=====
