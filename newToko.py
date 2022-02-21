@@ -1,27 +1,27 @@
 produk=[
     {
         'kategori':'pensil',
-        'merk':'faber castel',
-        'unit price':2000,
-        'unit sold':20
+        'merk':'stadler',
+        'u_price':2000,
+        'u_sold':20
     },
     {
         'kategori':'pulpen',
         'merk':'faster',
-        'unit price':3000,
-        'unit sold':10
+        'u_price':3000,
+        'u_sold':10
     },
     {
         'kategori':'penghapus',
         'merk':'joyko',
-        'unit price':5000,
-        'unit sold':5
+        'u_price':5000,
+        'u_sold':5
     }    
 ]
 def upd_produk():
     for i in range(len(produk)):
         produk[i]['nama']=produk[i]['kategori']+'_'+produk[i]['merk']
-        produk[i]['income']=produk[i]['unit sold']*produk[i]['unit price'] 
+        produk[i]['income']=produk[i]['u_sold']*produk[i]['u_price'] 
 upd_produk()
 
 def total_sales():
@@ -39,11 +39,33 @@ def cek_tambah(tambah_produk):
             break
     return (ket)
 
+def tambah_unit_sold():
+    while True:
+        x=input('Masukkan unit sold: ')
+        if x.isnumeric() == True:
+            return int(x)
+        else:
+            print('hanya masukkan angka')
+
+def tambah_unit_price():
+    while True:
+        x=input('Masukkan unit price: ')
+        if x.isnumeric() == True:
+            return int(x)
+        else:
+            print('hanya masukkan angka')
+
 def ada_porduk():
     if len(produk)==0:
         return False
     else:
         return True
+
+def cek_key(keyUpdate):
+    if (keyUpdate=='kategori'or keyUpdate=='merk' or keyUpdate=='u_sold' or keyUpdate=='u_price'):
+        return True
+    else:
+        return False
 
 def menu_1():
     while True:
@@ -56,12 +78,12 @@ def menu_1():
 Silahkan pilih submenu (1-3): ''')
         if(subMenu=='1'):
             if ada_porduk()==True:
-                print('Daftar seluruh produk')
-                print('{:20}\t|{:10}\t|{:15}\t|{:7}\t|{:7}\t|{}'.format('nama produk','kategori','merk','unit price','unit sold','income'))
+                print('\nDaftar seluruh produk\n')
+                print('{:20}|{:10}|{:10}|{:7}|{:7}|{}'.format('nama produk','kategori','merk','u_price','u_sold','income'))
                 for i in range(len(produk)):
-                    print('{:20}\t|{:10}\t|{:15}\t|{:7}\t|{:7}\t|{}'
+                    print('{:20}|{:10}|{:10}|{:7}|{:7}|{}'
                     .format(produk[i]['nama'],produk[i]['kategori'],produk[i]['merk'],
-                    produk[i]['unit price'],produk[i]['unit sold'],produk[i]['income']))
+                    produk[i]['u_price'],produk[i]['u_sold'],produk[i]['income']))
                 total_sales()
             else:
                 print("Tidak ada data produk")
@@ -73,10 +95,10 @@ Silahkan pilih submenu (1-3): ''')
             print('produk yang dicari: ',dicari)
             for i in range(len(produk)):
                 if(dicari==produk[i]['nama']):
-                    print('{:20}\t|{:10}\t|{:15}\t|{:7}\t|{:7}\t|{}'.format('nama produk','kategori','merk','unit price','unit sold','income'))
-                    ket=('{:20}\t|{:10}\t|{:15}\t|{:7}\t|{:7}\t|{}'
+                    print('{:20}|{:10}|{:10}|{:7}|{:7}|{}'.format('nama produk','kategori','merk','u_price','u_sold','income'))
+                    ket=('{:20}|{:10}|{:10}|{:7}|{:7}|{}'
                         .format(produk[i]['nama'],produk[i]['kategori'],produk[i]['merk'],
-                        produk[i]['unit price'],produk[i]['unit sold'],produk[i]['income']))
+                        produk[i]['u_price'],produk[i]['u_sold'],produk[i]['income']))
                     break
                 elif(dicari!=produk[i]['nama']):
                     ket=('produk tersebut tidak tersedia')
@@ -98,16 +120,16 @@ Silahkan pilih submenu (1-2): ''')
             tambah_merk=input('Merk produk yang ingin ditambahkan: ')
             tambah_produk=tambah_kat+'_'+tambah_merk
             if (cek_tambah(tambah_produk)==True):
-                tambah_unit_sold=int((input('Masukkan sold produk: ')))
-                tambah_unit_price=int((input('Masukkan harga produk: ')))
+                x=tambah_unit_price()
+                y=tambah_unit_sold()
                 while True:
                     confirm=input('Apakah data akan disimpan? (Y/N): ')
                     if(confirm=='Y' or confirm=='y'):
                         produk.append({
                             'kategori':tambah_kat,
                             'merk':tambah_merk,
-                            'unit price':tambah_unit_price,
-                            'unit sold':tambah_unit_sold
+                            'u_price':x,
+                            'u_sold':y
                         })
                         print('Catatan produk berhasil ditambahkan')
                         upd_produk()
@@ -164,28 +186,39 @@ Silahkan pilih submenu(1-2): ''')
             update=update_kat+'_'+update_merk
             for i in range(len(produk)):
                 if(update==produk[i]['nama']):
-                    print('nama produk: {}, kategori: {}, merk: {}, unit price: {}, unit sold: {}, sales: {}'
+                    print('nama produk: {}, kategori: {}, merk: {}, u_price: {}, u_sold: {}, sales: {}'
                     .format(produk[i]['nama'],produk[i]['kategori'],produk[i]['merk'],
-                    produk[i]['unit price'],produk[i]['unit sold'],produk[i]['income']))
+                    produk[i]['u_price'],produk[i]['u_sold'],produk[i]['income']))
                     while True:
                         confirm=input('Yakin mengubah data? (Y/N): ')
                         if(confirm=='Y' or confirm=='y'):
                             keyUpdate=(input('Keterangan yang ingin di edit: '))
-                            while True:
-                                valUpdate=(input('Masukkan {} baru: '.format(keyUpdate)))
-                                if(keyUpdate=='unit price' or keyUpdate=='unit sold'):
-                                    cek=valUpdate.isnumeric()
-                                    if (cek==True):
-                                        valUpdate=int(valUpdate)
-                                        break
+                            if cek_key(keyUpdate)==True:
+                                while True:
+                                    valUpdate=(input('Masukkan {} baru: '.format(keyUpdate)))
+                                    if(keyUpdate=='u_price' or keyUpdate=='u_sold'):
+                                        cek=valUpdate.isnumeric()
+                                        if (cek==True):
+                                            valUpdate=int(valUpdate)
+                                            break
+                                        else:
+                                            print('Hanya masukkan integer') 
                                     else:
-                                        print('Hanya masukkan integer') 
-                                else:
-                                    break
-                            produk[i][keyUpdate]=valUpdate   
-                            upd_produk()
-                            ket=('Berhasil merubah data')    
-                            break
+                                        break
+                                while True:
+                                    confirm=input('Yakin update? (Y/N): ')
+                                    if(confirm=='Y' or confirm=='y'):
+                                        produk[i][keyUpdate]=valUpdate   
+                                        upd_produk()
+                                        ket=('Berhasil merubah data')
+                                        break
+                                    elif(confirm=='N' or confirm=='n'):
+                                        ket=('Batal merubah data')
+                                        break
+                                break
+                            else:
+                                ket=('tidak ada field bernama',keyUpdate)
+                                break
                         elif(confirm=='N' or confirm=='n'):
                             ket=('Batal merubah data')
                             break
@@ -197,7 +230,6 @@ Silahkan pilih submenu(1-2): ''')
             break
 
 while True:
-    upd_produk()
     pilihanMenu=input('''
 =====Penjualan Toko Guido=====
 
