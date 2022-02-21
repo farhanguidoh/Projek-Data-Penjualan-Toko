@@ -39,6 +39,12 @@ def cek_tambah(tambah_produk):
             break
     return (ket)
 
+def ada_porduk():
+    if len(produk)==0:
+        return False
+    else:
+        return True
+
 def menu_1():
     while True:
         subMenu=input('''
@@ -49,13 +55,16 @@ def menu_1():
 3. Kembali ke menu utama
 Silahkan pilih submenu (1-3): ''')
         if(subMenu=='1'):
-            print('Daftar seluruh produk')
-            print('{:20}\t|{:10}\t|{:15}\t|{:7}\t|{:7}\t|{}'.format('nama produk','kategori','merk','unit price','unit sold','income'))
-            for i in range(len(produk)):
-                print('{:20}\t|{:10}\t|{:15}\t|{:7}\t|{:7}\t|{}'
-                .format(produk[i]['nama'],produk[i]['kategori'],produk[i]['merk'],
-                produk[i]['unit price'],produk[i]['unit sold'],produk[i]['income']))
-            total_sales()
+            if ada_porduk()==True:
+                print('Daftar seluruh produk')
+                print('{:20}\t|{:10}\t|{:15}\t|{:7}\t|{:7}\t|{}'.format('nama produk','kategori','merk','unit price','unit sold','income'))
+                for i in range(len(produk)):
+                    print('{:20}\t|{:10}\t|{:15}\t|{:7}\t|{:7}\t|{}'
+                    .format(produk[i]['nama'],produk[i]['kategori'],produk[i]['merk'],
+                    produk[i]['unit price'],produk[i]['unit sold'],produk[i]['income']))
+                total_sales()
+            else:
+                print("Tidak ada data produk")
         if(subMenu=='2'):
             print('Data produk tertentu')
             dicari_kat=input('kategori yang dicari: ')
@@ -186,8 +195,9 @@ Silahkan pilih submenu(1-2): ''')
             print(ket)
         elif(subMenu=='2'):
             break
-        
+
 while True:
+    upd_produk()
     pilihanMenu=input('''
 =====Penjualan Toko Guido=====
 
