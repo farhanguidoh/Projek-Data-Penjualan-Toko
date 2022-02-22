@@ -87,7 +87,7 @@ Silahkan pilih submenu (1-3): ''')
                 total_sales()
             else:
                 print("Tidak ada data produk")
-        if(subMenu=='2'):
+        elif(subMenu=='2'):
             print('Data produk tertentu')
             dicari_kat=input('kategori yang dicari: ')
             dicari_merk=input('merk yang dicari: ')
@@ -231,7 +231,7 @@ Silahkan pilih submenu(1-2): ''')
 
 while True:
     pilihanMenu=input('''
-=====Penjualan Toko Guido=====
+=====Penjualan Toko Alat Tulis Guido=====
 
 Menu:
 1. Menampilkan Daftar penjualan
